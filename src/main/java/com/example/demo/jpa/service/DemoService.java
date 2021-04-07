@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -20,5 +21,13 @@ public class DemoService {
     public List<Parent> list() {
         List<Parent> parents = demoRepository.findAll();
         return parents;
+    }
+
+    public Optional<Parent> findByIdOrderByChildAgeDesc(Long id) {
+        return demoRepository.findById(id);
+    }
+
+    public List findParentWithChild() {
+        return demoRepository.findParentWithChild();
     }
 }

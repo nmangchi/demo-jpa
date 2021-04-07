@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -37,5 +38,19 @@ public class DemoController {
         demoService.save(parent);
 
         return ResponseEntity.ok(parent);
+    }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity info(@PathVariable Long id) {
+        Optional<Parent> parent = demoService.findByIdOrderByChildAgeDesc(id);
+
+        return ResponseEntity.ok(parent);
+    }
+
+    @GetMapping("/parents/list")
+    public ResponseEntity listParents() {
+        List parents = demoService.findParentWithChild();
+
+        return ResponseEntity.ok(parents);
     }
 }
